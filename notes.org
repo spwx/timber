@@ -1,0 +1,68 @@
+#+title: Notes
+
+* TODO
+** DONE Move Weapons To Separate File
+** Increment Bonus On Hit
+** Create A Weapon Trait
+** Create A Vector Of Damage Die
+- create a vector of damage die and if
+* Traits Vs. Enum
+- use enums unless you need a trait
+- you'll need a trait when building a library which must work with unspecified
+  types
+
+* Character's Have A
+** Weapon
+** Attack Method - must go here because all damage die must be doubled, not just weapon's
+** proficiency field
+** Attack Roll Method
+
+* Weapons Have A
+** Damage Method - returns hit die and type
+** Damage Die Property
+** Bonus Property
+
+* Help
+Character owns a Weapon
+
+#+begin_src rust
+struct Character {
+    weapon: Weapon,
+}
+
+impl Character {
+    fn attack(&mut self) {
+        self.weapon.damage();
+    }
+}
+
+struct Weapon {
+    bonus: i32,
+}
+
+impl Weapon {
+    fn damage(&mut self) {
+        self.bonus += 1;
+    }
+}
+
+fn main() {
+    let mut jengu = Character {
+        weapon: Weapon { bonus: 0 },
+    };
+
+
+    jengu.attack();
+
+    dbg!(assert_eq!(1_i32, jengu.weapon.bonus));
+}
+#+end_src
+
+#+RESULTS:
+: [src/main.rs:30] assert_eq!(1_i32, jengu.weapon.bonus) = ()
+
+* Help
+Damage:
+- hit die
+- modifiers
+-
